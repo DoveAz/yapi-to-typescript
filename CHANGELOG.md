@@ -1,5 +1,7 @@
 # 更新日志
 
+### [3.38.2](https://github.com/DoveAz/yapi-to-typescript/compare/v3.38.1...v3.38.2) (2024-01-04)
+
 ### [3.38.1](https://github.com/DoveAz/yapi-to-typescript/compare/v3.38.0...v3.38.1) (2024-01-04)
 
 ## 3.38.0 (2024-01-04)
