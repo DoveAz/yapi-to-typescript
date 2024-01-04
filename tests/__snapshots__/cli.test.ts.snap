@@ -57,6 +57,13 @@ export default defineConfig([
 
 exports[`cli 检查到已有配置，可以选择覆盖: 修改过的配置文件 1`] = `"hello"`;
 
+exports[`cli 检查到已有配置，可以选择覆盖: 接口文件 1`] = `
+"/* prettier-ignore-start */
+[object Promise]
+/* prettier-ignore-end */
+"
+`;
+
 exports[`cli 检查到已有配置，可以选择覆盖: 覆盖后的配置文件 1`] = `
 "import { defineConfig } from 'yapi-to-typescript'
 
@@ -94,6 +101,44 @@ export default defineConfig([
     ],
   },
 ])"
+`;
+
+exports[`cli 检查到已有配置，可以选择覆盖: 请求文件 1`] = `
+"import type { RequestFunctionParams } from 'yapi-to-typescript'
+
+export interface RequestOptions {
+  /**
+   * 使用的服务器。
+   *
+   * - \`prod\`: 生产服务器
+   * - \`dev\`: 测试服务器
+   * - \`mock\`: 模拟服务器
+   *
+   * @default prod
+   */
+  server?: 'prod' | 'dev' | 'mock',
+}
+
+export default function request<TResponseData>(
+  payload: RequestFunctionParams,
+  options: RequestOptions = {
+    server: 'prod',
+  },
+): Promise<TResponseData> {
+  return new Promise<TResponseData>((resolve, reject) => {
+    // 基本地址
+    const baseUrl = options.server === 'mock'
+      ? payload.mockUrl
+      : options.server === 'dev'
+        ? payload.devUrl
+        : payload.prodUrl
+
+    // 请求地址
+    const url = \`\${baseUrl}\${payload.path}\`
+
+    // 具体请求逻辑
+  })
+}"
 `;
 
 exports[`cli 检查到已有配置，可以选择覆盖: 配置文件 1`] = `
@@ -2821,4 +2866,16 @@ export default defineConfig([
     ],
   },
 ])"
+`;
+
+exports[`cli 没有配置文件生成将会报错: help 1`] = `
+"
+# 用法
+  初始化配置文件: ytt init
+  生成代码: ytt
+  查看帮助: ytt help
+
+# GitHub
+  https://github.com/fjc0k/yapi-to-typescript
+"
 `;

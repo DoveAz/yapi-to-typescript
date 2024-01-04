@@ -1,4 +1,5 @@
 import * as changeCase from 'change-case'
+import { exec } from 'child_process'
 import dayjs from 'dayjs'
 import fs from 'fs-extra'
 import path from 'path'
@@ -17,6 +18,7 @@ import {
   uniq,
   values,
 } from 'vtils'
+import { SwaggerToYApiServer } from './SwaggerToYApiServer'
 import {
   CategoryList,
   CommentConfig,
@@ -32,7 +34,6 @@ import {
   ServerConfig,
   SyntheticalConfig,
 } from './types'
-import { exec } from 'child_process'
 import {
   getCachedPrettierOptions,
   getNormalizedRelativePath,
@@ -43,7 +44,6 @@ import {
   sortByWeights,
   throwError,
 } from './utils'
-import { SwaggerToYApiServer } from './SwaggerToYApiServer'
 
 interface OutputFileList {
   [outputFilePath: string]: {
@@ -175,9 +175,8 @@ export class Generator {
                         )
 
                         // 接口列表
-                        let interfaceList = await this.fetchInterfaceList(
-                          syntheticalConfig,
-                        )
+                        let interfaceList =
+                          await this.fetchInterfaceList(syntheticalConfig)
                         interfaceList = interfaceList
                           .map(interfaceInfo => {
                             // 实现 _project 字段
@@ -259,17 +258,17 @@ export class Generator {
                                   ? ''
                                   : dedent`
                                       const mockUrl${categoryUID} = ${JSON.stringify(
-                                      syntheticalConfig.mockUrl,
-                                    )} as any
+                                        syntheticalConfig.mockUrl,
+                                      )} as any
                                       const devUrl${categoryUID} = ${JSON.stringify(
-                                      syntheticalConfig.devUrl,
-                                    )} as any
+                                        syntheticalConfig.devUrl,
+                                      )} as any
                                       const prodUrl${categoryUID} = ${JSON.stringify(
-                                      syntheticalConfig.prodUrl,
-                                    )} as any
+                                        syntheticalConfig.prodUrl,
+                                      )} as any
                                       const dataKey${categoryUID} = ${JSON.stringify(
-                                      syntheticalConfig.dataKey,
-                                    )} as any
+                                        syntheticalConfig.dataKey,
+                                      )} as any
                                     `,
                               ),
                               ...sortByWeights(
@@ -529,7 +528,7 @@ export class Generator {
         })
         const outputContent = `${dedent`
           /* prettier-ignore-start */
-          ${prettyOutputContent}
+          ${await prettyOutputContent}
           /* prettier-ignore-end */
         `}\n`
         await fs.outputFile(outputFilePath, outputContent)
@@ -853,7 +852,7 @@ export class Generator {
       const extraComment: string = summary
         .filter(item => typeof item !== 'boolean' && !isEmpty(item.value))
         .map(item => {
-          const _item: Exclude<typeof summary[0], boolean> = item as any
+          const _item: Exclude<(typeof summary)[0], boolean> = item as any
           return `* @${_item.label} ${castArray(_item.value).join(', ')}`
         })
         .join('\n')

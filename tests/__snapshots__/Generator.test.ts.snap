@@ -9986,6 +9986,51 @@ onlyPostFormDataTest.requestConfig = onlyPostFormDataTestRequestConfig
 "
 `;
 
+exports[`Generator 只生成返回数据的 JSON Schema: 接口文件 2`] = `
+"/* prettier-ignore-start */
+[object Promise]
+/* prettier-ignore-end */
+"
+`;
+
+exports[`Generator 只生成返回数据的 JSON Schema: 请求文件 1`] = `
+"import type { RequestFunctionParams } from 'yapi-to-typescript'
+
+export interface RequestOptions {
+  /**
+   * 使用的服务器。
+   *
+   * - \`prod\`: 生产服务器
+   * - \`dev\`: 测试服务器
+   * - \`mock\`: 模拟服务器
+   *
+   * @default prod
+   */
+  server?: 'prod' | 'dev' | 'mock',
+}
+
+export default function request<TResponseData>(
+  payload: RequestFunctionParams,
+  options: RequestOptions = {
+    server: 'prod',
+  },
+): Promise<TResponseData> {
+  return new Promise<TResponseData>((resolve, reject) => {
+    // 基本地址
+    const baseUrl = options.server === 'mock'
+      ? payload.mockUrl
+      : options.server === 'dev'
+        ? payload.devUrl
+        : payload.prodUrl
+
+    // 请求地址
+    const url = \`\${baseUrl}\${payload.path}\`
+
+    // 具体请求逻辑
+  })
+}"
+`;
+
 exports[`Generator 只生成返回数据的 JSON Schema: 输出内容 1`] = `
 Array [
   "const mockUrl_0_0_0_0 = \\"http://foo.bar/mock/32\\" as any
@@ -31715,6 +31760,13 @@ onlyPostFormDataTest.requestConfig = onlyPostFormDataTestRequestConfig
 "
 `;
 
+exports[`Generator 无标签注释: 接口文件 2`] = `
+"/* prettier-ignore-start */
+[object Promise]
+/* prettier-ignore-end */
+"
+`;
+
 exports[`Generator 无标签注释: 输出内容 1`] = `
 Array [
   "const mockUrl_0_0_0_0 = \\"http://foo.bar/mock/32\\" as any
@@ -35076,6 +35128,13 @@ onlyPostFormDataTest.requestConfig = onlyPostFormDataTestRequestConfig
 "
 `;
 
+exports[`Generator 无标题注释: 接口文件 2`] = `
+"/* prettier-ignore-start */
+[object Promise]
+/* prettier-ignore-end */
+"
+`;
+
 exports[`Generator 无标题注释: 输出内容 1`] = `
 Array [
   "const mockUrl_0_0_0_0 = \\"http://foo.bar/mock/32\\" as any
@@ -37768,6 +37827,13 @@ export const onlyPostFormDataTest = /*#__PURE__*/ (
 
 onlyPostFormDataTest.requestConfig = onlyPostFormDataTestRequestConfig
 
+/* prettier-ignore-end */
+"
+`;
+
+exports[`Generator 无注释: 接口文件 2`] = `
+"/* prettier-ignore-start */
+[object Promise]
 /* prettier-ignore-end */
 "
 `;
@@ -44072,6 +44138,13 @@ export const onlyPostFormDataTest = /*#__PURE__*/ (
 
 onlyPostFormDataTest.requestConfig = onlyPostFormDataTestRequestConfig
 
+/* prettier-ignore-end */
+"
+`;
+
+exports[`Generator 无链接注释: 接口文件 2`] = `
+"/* prettier-ignore-start */
+[object Promise]
 /* prettier-ignore-end */
 "
 `;
@@ -60364,7 +60437,52 @@ jsonTest.requestConfig = jsonTestRequestConfig
 "
 `;
 
+exports[`Generator 正确生成代码并写入文件 - 排除分类: 接口文件 2`] = `
+"/* prettier-ignore-start */
+[object Promise]
+/* prettier-ignore-end */
+"
+`;
+
 exports[`Generator 正确生成代码并写入文件 - 排除分类: 请求文件 1`] = `
+"import type { RequestFunctionParams } from 'yapi-to-typescript'
+
+export interface RequestOptions {
+  /**
+   * 使用的服务器。
+   *
+   * - \`prod\`: 生产服务器
+   * - \`dev\`: 测试服务器
+   * - \`mock\`: 模拟服务器
+   *
+   * @default prod
+   */
+  server?: 'prod' | 'dev' | 'mock',
+}
+
+export default function request<TResponseData>(
+  payload: RequestFunctionParams,
+  options: RequestOptions = {
+    server: 'prod',
+  },
+): Promise<TResponseData> {
+  return new Promise<TResponseData>((resolve, reject) => {
+    // 基本地址
+    const baseUrl = options.server === 'mock'
+      ? payload.mockUrl
+      : options.server === 'dev'
+        ? payload.devUrl
+        : payload.prodUrl
+
+    // 请求地址
+    const url = \`\${baseUrl}\${payload.path}\`
+
+    // 具体请求逻辑
+  })
+}"
+`;
+
+exports[`Generator 正确生成代码并写入文件 - 排除分类: 请求文件 2`] = `
 "import type { RequestFunctionParams } from 'yapi-to-typescript'
 
 export interface RequestOptions {
@@ -62370,6 +62488,20 @@ jsonTest.requestConfig = jsonTestRequestConfig;
 "
 `;
 
+exports[`Generator 生成 JavaScript 代码: 接口文件 2`] = `
+"/* prettier-ignore-start */
+[object Promise]
+/* prettier-ignore-end */
+"
+`;
+
+exports[`Generator 生成 JavaScript 代码: 接口文件 3`] = `
+"/* prettier-ignore-start */
+[object Promise]
+/* prettier-ignore-end */
+"
+`;
+
 exports[`Generator 生成 JavaScript 代码: 请求文件 1`] = `
 "export default function request(payload, options = {
     server: 'prod',
@@ -62387,6 +62519,44 @@ exports[`Generator 生成 JavaScript 代码: 请求文件 1`] = `
     });
 }
 "
+`;
+
+exports[`Generator 生成 JavaScript 代码: 请求文件 2`] = `
+"import type { RequestFunctionParams } from 'yapi-to-typescript'
+
+export interface RequestOptions {
+  /**
+   * 使用的服务器。
+   *
+   * - \`prod\`: 生产服务器
+   * - \`dev\`: 测试服务器
+   * - \`mock\`: 模拟服务器
+   *
+   * @default prod
+   */
+  server?: 'prod' | 'dev' | 'mock',
+}
+
+export default function request<TResponseData>(
+  payload: RequestFunctionParams,
+  options: RequestOptions = {
+    server: 'prod',
+  },
+): Promise<TResponseData> {
+  return new Promise<TResponseData>((resolve, reject) => {
+    // 基本地址
+    const baseUrl = options.server === 'mock'
+      ? payload.mockUrl
+      : options.server === 'dev'
+        ? payload.devUrl
+        : payload.prodUrl
+
+    // 请求地址
+    const url = \`\${baseUrl}\${payload.path}\`
+
+    // 具体请求逻辑
+  })
+}"
 `;
 
 exports[`Generator 生成 JavaScript 代码: 输出内容 1`] = `
@@ -70314,6 +70484,37 @@ refTypeTest.requestConfig = refTypeTestRequestConfig",
 ]
 `;
 
+exports[`Generator 生成请求数据和返回数据的 JSON Schema: Hook 生成文件 1`] = `
+"import { useState, useEffect } from 'react'
+import type { RequestConfig } from 'yapi-to-typescript'
+import type { Request } from \\"./index\\"
+import baseRequest from \\"./request\\"
+
+export default function makeRequestHook<TRequestData, TRequestConfig extends RequestConfig, TRequestResult extends ReturnType<typeof baseRequest>>(request: Request<TRequestData, TRequestConfig, TRequestResult>) {
+  type Data = TRequestResult extends Promise<infer R> ? R : TRequestResult
+  return function useRequest(requestData: TRequestData) {
+    // 一个简单的 Hook 实现，实际项目可结合其他库使用，比如：
+    // @umijs/hooks 的 useRequest (https://github.com/umijs/hooks)
+    // swr (https://github.com/zeit/swr)
+
+    const [loading, setLoading] = useState(true)
+    const [data, setData] = useState<Data>()
+
+    useEffect(() => {
+      request(requestData).then(data => {
+        setLoading(false)
+        setData(data as any)
+      })
+    }, [JSON.stringify(requestData)])
+
+    return {
+      loading,
+      data,
+    }
+  }
+}"
+`;
+
 exports[`Generator 生成请求数据和返回数据的 JSON Schema: 接口文件 1`] = `
 "/* prettier-ignore-start */
 /* tslint:disable */
@@ -72248,6 +72449,89 @@ onlyPostFormDataTest.requestConfig = onlyPostFormDataTestRequestConfig
 
 /* prettier-ignore-end */
 "
+`;
+
+exports[`Generator 生成请求数据和返回数据的 JSON Schema: 接口文件 2`] = `
+"/* prettier-ignore-start */
+[object Promise]
+/* prettier-ignore-end */
+"
+`;
+
+exports[`Generator 生成请求数据和返回数据的 JSON Schema: 请求文件 1`] = `
+"import type { RequestFunctionParams } from 'yapi-to-typescript'
+
+export interface RequestOptions {
+  /**
+   * 使用的服务器。
+   *
+   * - \`prod\`: 生产服务器
+   * - \`dev\`: 测试服务器
+   * - \`mock\`: 模拟服务器
+   *
+   * @default prod
+   */
+  server?: 'prod' | 'dev' | 'mock',
+}
+
+export default function request<TResponseData>(
+  payload: RequestFunctionParams,
+  options: RequestOptions = {
+    server: 'prod',
+  },
+): Promise<TResponseData> {
+  return new Promise<TResponseData>((resolve, reject) => {
+    // 基本地址
+    const baseUrl = options.server === 'mock'
+      ? payload.mockUrl
+      : options.server === 'dev'
+        ? payload.devUrl
+        : payload.prodUrl
+
+    // 请求地址
+    const url = \`\${baseUrl}\${payload.path}\`
+
+    // 具体请求逻辑
+  })
+}"
+`;
+
+exports[`Generator 生成请求数据和返回数据的 JSON Schema: 请求文件 2`] = `
+"import type { RequestFunctionParams } from 'yapi-to-typescript'
+
+export interface RequestOptions {
+  /**
+   * 使用的服务器。
+   *
+   * - \`prod\`: 生产服务器
+   * - \`dev\`: 测试服务器
+   * - \`mock\`: 模拟服务器
+   *
+   * @default prod
+   */
+  server?: 'prod' | 'dev' | 'mock',
+}
+
+export default function request<TResponseData>(
+  payload: RequestFunctionParams,
+  options: RequestOptions = {
+    server: 'prod',
+  },
+): Promise<TResponseData> {
+  return new Promise<TResponseData>((resolve, reject) => {
+    // 基本地址
+    const baseUrl = options.server === 'mock'
+      ? payload.mockUrl
+      : options.server === 'dev'
+        ? payload.devUrl
+        : payload.prodUrl
+
+    // 请求地址
+    const url = \`\${baseUrl}\${payload.path}\`
+
+    // 具体请求逻辑
+  })
+}"
 `;
 
 exports[`Generator 生成请求数据和返回数据的 JSON Schema: 输出内容 1`] = `
